@@ -1,0 +1,34 @@
+public static void main(String[] args) {//算法核心 π/4=1-1/3+1/5-1/7+1/9。。。
+		double sum=0;				//等号右边
+		int b;					//输入精度
+		double c=1.0;				//分母
+		Scanner in =new Scanner(System.in);
+		b=in.nextInt();				//输入精度
+		for(int a=1;a<b;a++){			
+			if(a%2!=0)			//奇偶判断决定符号
+				sum=sum+1.0/c;
+			else
+				sum=sum-1.0/c;
+			c+=2;				//c自增2
+		}
+		System.out.println(sum*4);		//输出
+	}
+
+
+
+
+public static void main(String[] args) {
+		double sum=0;
+		int b;
+		double c=1.0;
+		Scanner in =new Scanner(System.in);
+		b=in.nextInt();
+		for(int a=1;a<b;a++){
+			if(a%2!=0)
+				sum=sum+1.0/c;
+			else
+				sum=sum-1.0/c;
+			c+=2;
+		}
+		System.out.println(sum*4);
+	}

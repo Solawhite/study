@@ -1,0 +1,154 @@
+package cookie;
+
+import java.applet.*;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+import java.math.BigInteger;  
+import java.nio.MappedByteBuffer;  
+import java.nio.channels.FileChannel;  
+import java.security.MessageDigest;  
+import java.util.Scanner;
+   
+class Panel1 extends JPanel{
+	JButton Button1,Button2,Button3;
+	Panel1(){
+		Button1=new JButton("简易比较");
+		Button2=new JButton("精细比较");
+		Button3=new JButton("复位");
+		setLayout(new GridLayout(1,3));		
+		add(Button1);
+		add(Button2);
+		add(Button3);
+	}
+}
+public class test extends Applet implements ActionListener{	
+	Panel1 panel1;
+	JTextField textA,textB;
+	JTextArea text;
+	public void init(){		
+		textA=new JTextField();
+		textB=new JTextField();
+		panel1=new Panel1();
+		text=new JTextArea(4,10);
+		text.setLineWrap(true);
+		text.setEditable(false);
+		JScrollPane jsp=new JScrollPane(text);
+		setLayout(new GridLayout(6,1));	
+		setSize(400,400);		
+		setVisible(true);
+		add(new JLabel("地址1",JLabel.LEFT));
+		add(textA);
+		add(new JLabel("地址2",JLabel.LEFT));
+		add(textB);
+		add(panel1);
+		add(jsp);
+		(panel1.Button1).addActionListener(this);
+		(panel1.Button2).addActionListener(this);
+		(panel1.Button3).addActionListener(this);
+	}
+	public void actionPerformed(ActionEvent e){
+		String Add1=textA.getText();
+		String Add2=textB.getText();
+		String add1=Add1.replaceAll("\\\\", "\\\\\\\\");
+		String add2=Add2.replaceAll("\\\\", "\\\\\\\\");
+		if(e.getSource()==(panel1.Button1)){		    					
+			text.setText(null);
+			String Md51=null;
+			try {
+				Md51 = generateMD5(add1);
+			} catch (Exception e1) {			
+				e1.printStackTrace();
+			}
+			String Md52=null;
+			try {
+				Md52 = generateMD5(add2);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			if(Md51.equals(Md52))
+				text.append("完全相等"+"\n");
+			else
+				text.append("不完全相等"+"\n");		    
+		}
+		else if(e.getSource()==(panel1.Button2)){
+			text.setText(null);
+			Scanner in1 = null;
+			try {
+				in1 = new Scanner(new File(add1));
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			Scanner in2 = null;
+			try {
+				in2 = new Scanner(new File(add2));
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			int i=1;
+			while(in1.hasNext()&&in2.hasNext()){
+				String Str1=in1.nextLine();
+				String Str2=in2.nextLine();
+				String str1=Str1.replaceAll(" ", "");
+				String str2=Str2.replaceAll(" ", "");
+				if(!(str1.equals(str2))){
+					text.append("第"+i+"行"+CP(str1,str2));
+					text.append("\n");
+				}
+				i++;
+			}
+			if(in1.hasNext()){
+				int line=0;
+				while(in1.hasNext()){
+					String temp=in1.nextLine();
+					line++;
+				}
+				text.append("文件1剩余"+line+"行");
+			}
+			else if(in2.hasNext()){
+				int line=0;
+				while(in2.hasNext()){
+					String temp=in2.nextLine();
+					line++;
+				}
+				text.append("文件2剩余"+line+"行");
+			}
+			else
+				text.append("比较完成");
+			}
+		else if(e.getSource()==(panel1.Button3)){
+			textA.setText(null);
+			textB.setText(null);
+			text.setText(null);
+		}
+		}		    
+	public static String CP(String a,String b){
+		if(a.length()!=b.length())
+			return " " ;
+		else{
+			String temp=" ";
+			char q[]=a.toCharArray();
+			char w[]=b.toCharArray();
+			int len=a.length();
+			for(int i=0;i<len;i++){
+				if(q[i]!=w[i])
+					temp=temp+"第"+(i+1)+"个\""+q[i]+"\" \""+w[i]+"\"  ";
+			}
+			return temp;
+		}
+	}
+	public static String generateMD5(String path) throws Exception{  
+        String strMD5 = null;  
+        File file = new File(path);  
+        FileInputStream in = new FileInputStream(file);  
+        MappedByteBuffer buffer = in.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, file.length());  
+        MessageDigest digest = MessageDigest.getInstance("md5");  
+        digest.update(buffer);  
+        in.close();           
+        byte[] byteArr = digest.digest();  
+        BigInteger bigInteger = new BigInteger(1, byteArr);  
+        strMD5 = bigInteger.toString(16);  
+        return strMD5;  
+    } 
+}

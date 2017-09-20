@@ -1,0 +1,59 @@
+public static void main(String[] args) {
+		String input;				//输入
+		Scanner in=new Scanner(System.in);
+		input=in.next();
+		int len=input.length();			//取长度
+		int i;					//获取+位置！！
+		for(i=0;i<len;i++){
+			if(input.charAt(i)=='+'){
+				break;
+			}
+		}
+		String add1=input.substring(0, i);	//分段
+		String add2=input.substring(i+1, len);	//分段
+		int a=ToInt(add1);			//string转int
+		int b=ToInt(add2);
+		System.out.println(a+b);
+		}
+	public static int ToInt(String str) {
+		int len=str.length();			//取长度（控制循环次数）
+		int temp=len;				//长度（控制10^n）
+		int sum=0;				//求各位和
+		for(int i=0;i<len;i++){
+			sum=(int) (sum+Math.pow(10, temp-1)*((int)str.charAt(i)-'0'));//sum+10的n次*int的那一位！！！！！
+			temp--;				//位数-1!!!
+		}
+		return sum;
+	}
+
+
+
+
+
+public static void main(String[] args) {
+		String input;
+		Scanner in=new Scanner(System.in);
+		input=in.next();
+		int len=input.length();
+		int i;
+		for(i=0;i<len;i++){
+			if(input.charAt(i)=='+'){
+				break;
+			}
+		}
+		String add1=input.substring(0, i);
+		String add2=input.substring(i+1, len);
+		int a=ToInt(add1);
+		int b=ToInt(add2);
+		System.out.println(a+b);
+		}
+	public static int ToInt(String str) {
+		int len=str.length();
+		int temp=len;
+		int sum=0;
+		for(int i=0;i<len;i++){
+			sum=(int) (sum+Math.pow(10, temp-1)*((int)str.charAt(i)-'0'));
+			temp--;
+		}
+		return sum;
+	}

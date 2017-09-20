@@ -1,0 +1,104 @@
+import java.io.File;											//条件受限，只能到long的最大值，输出最终为61，大约等半分钟！！！
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class QAQ {
+
+	public static void main(String[] args) throws InterruptedException, FileNotFoundException {
+		// TODO 自动生成的方法存根
+		ArrayList<Integer> arr =new ArrayList<Integer>();					//arrtlist存储所有读取的素数
+		Scanner file=new Scanner(new File("C:\\Users\\china\\Desktop\\JAVA\\link\\Prime.yis")); //素数表
+		while(file.hasNext()){									//读取，如果还有
+			if(file.hasNextInt()){								//只读整数（跳过空格）
+				arr.add(file.nextInt());
+			}
+			else{
+				String q;								//异常处理
+				q=file.next();
+			}
+		}
+		for(int a=0;a<arr.size();a++){								//访问arr的每一项
+			long q=arr.get(a);
+			long w=(long) Math.pow(2, q)-1;							//计算梅森数
+			if (isPrime(w)) {								// 调用isPrime判断是否为素数   					
+                System.out.println(q);									//是 输出
+			} 
+		}
+	}
+	public static boolean isPrime(long a) {  							//判断素数						
+		  	
+        boolean flag = true;  										//循环结束无返回时的返回值（为素数时）
+  
+        if (a < 2) {											// 素数不小于2  
+            return false;  
+        } else {  
+  
+            for (long i = 2; i <= Math.sqrt(a); i++) {  
+  
+                if (a % i == 0) {									// 若能被整除，则说明不是素数，返回false  
+  
+                    flag = false;  
+                    break;										// 跳出循环  
+                }  
+            }  
+        }  
+        return flag;  											//循环结束，返回
+    }  
+}
+
+
+
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class QAQ {
+
+	public static void main(String[] args) throws InterruptedException, FileNotFoundException {
+		// TODO 自动生成的方法存根
+		ArrayList<Integer> arr =new ArrayList<Integer>();
+		Scanner file=new Scanner(new File("C:\\Users\\china\\Desktop\\JAVA\\link\\Prime.yis"));
+		while(file.hasNext()){
+			if(file.hasNextInt()){
+				arr.add(file.nextInt());
+			}
+			else{
+				String q;
+				q=file.next();
+			}
+		}
+		for(int a=0;a<arr.size();a++){
+			long q=arr.get(a);
+			long w=(long) Math.pow(2, q)-1;
+			if (isPrime(w)) {// 调用isPrime()方法    
+                System.out.println(q);
+			}
+		}
+	}
+	public static boolean isPrime(long a) {  
+		  
+        boolean flag = true;  
+  
+        if (a < 2) {// 素数不小于2  
+            return false;  
+        } else {  
+  
+            for (long i = 2; i <= Math.sqrt(a); i++) {  
+  
+                if (a % i == 0) {// 若能被整除，则说明不是素数，返回false  
+  
+                    flag = false;  
+                    break;// 跳出循环  
+                }  
+            }  
+        }  
+        return flag;  
+    }  
+}
+
+
+

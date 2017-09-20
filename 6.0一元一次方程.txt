@@ -1,0 +1,122 @@
+import java.util.Scanner;
+
+
+public class QQQ {
+
+	public static void main(String[] args) {
+		Scanner in =new Scanner(System.in);
+		String FC = in.next();
+		int length = FC.length();			//整体长度
+		int ZF=0; 					//符号+为1，-为0
+		int FH=length ;					//确定符号位置
+		int DH=length ;					//确定等号位置
+		int X=length;					//确定x位置
+		String len1,len2,len3,xz1;			//
+		for (int i=0;i<length ;i++){			//上3行
+			char a=FC.charAt(i);
+			if(a=='+'||a=='-'){
+				FH=i;
+				if(a=='+')
+					ZF=1;
+			}
+			else if(a=='=')
+				DH=i;
+			else if(a=='x')
+				X=i;
+		}
+		if(X<FH){
+			len1=FC.substring(0,FH);		//分段，保证x在len1
+			len2=FC.substring(FH+1,DH);
+		}
+		else{
+			len2=FC.substring(0,FH);
+			len1=FC.substring(FH+1,DH);
+		}
+		len3=FC.substring(DH+1,length);
+		int len1_length = len1.length();
+		xz1=len1.substring(0, len1_length-1);		//去x
+		int a,b,c;
+		a=ToInt(xz1);b=ToInt(len2);c=ToInt(len3);	//ToInt
+		if(ZF==1){
+			System.out.println("x = "+(c-b)*1.0/(double)a);//标准格式（ax+b=c）
+		}
+		else
+			System.out.println("x = "+(c+b)*1.0/(double)a);
+
+	}
+
+	public static int ToInt(String str) {			//string to int（详见4.0加法计算器）
+		int len=str.length();			
+		int temp=len;				
+		int sum=0;				
+		for(int i=0;i<len;i++){
+			sum=(int) (sum+Math.pow(10, temp-1)*((int)str.charAt(i)-'0'));
+			temp--;				
+		}
+		return sum;
+	}
+
+}
+
+
+
+import java.util.Scanner;
+
+
+public class QQQ {
+
+	public static void main(String[] args) {
+		Scanner in =new Scanner(System.in);
+		String FC = in.next();
+		int length = FC.length();
+		int ZF=0; 
+		int FH=length ;
+		int DH=length ;
+		int X=length;
+		String len1,len2,len3,xz1;
+		for (int i=0;i<length ;i++){
+			char a=FC.charAt(i);
+			if(a=='+'||a=='-'){
+				FH=i;
+				if(a=='+')
+					ZF=1;
+			}
+			else if(a=='=')
+				DH=i;
+			else if(a=='x')
+				X=i;
+		}
+		if(X<FH){
+			len1=FC.substring(0,FH);
+			len2=FC.substring(FH+1,DH);
+		}
+		else{
+			len2=FC.substring(0,FH);
+			len1=FC.substring(FH+1,DH);
+		}
+		len3=FC.substring(DH+1,length);
+		int len1_length = len1.length();
+		xz1=len1.substring(0, len1_length-1);
+		int a,b,c;
+		a=ToInt(xz1);b=ToInt(len2);c=ToInt(len3);
+		if(ZF==1){
+			System.out.println("x = "+(c-b)*1.0/(double)a);
+		}
+		else
+			System.out.println("x = "+(c+b)*1.0/(double)a);
+
+	}
+
+	public static int ToInt(String str) {
+		int len=str.length();			
+		int temp=len;				
+		int sum=0;				
+		for(int i=0;i<len;i++){
+			sum=(int) (sum+Math.pow(10, temp-1)*((int)str.charAt(i)-'0'));//sum+10的n次*int的那一位！！！！！
+			temp--;				
+		}
+		return sum;
+	}
+
+}
+

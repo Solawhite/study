@@ -1,0 +1,43 @@
+public static void main(String[] args) {
+		// TODO 自动生成的方法存根
+		int a;
+		Scanner in =new Scanner(System.in);//新建扫描
+		a=in.nextInt();			   //输入a	
+		switch(a/10){			   //a/10取商！！！
+		case 0: case 1: case 2: case 3: case 4: case 5://商0,1,2,3,4,5（小于60）
+			System.out.println("D");
+			break;
+		case 6:				   //60-70
+			System.out.println("C");
+			break;
+		case 7: case 8:			   //70-90
+			System.out.println("B");
+			break;
+		case 9: case 10:		   //90-100
+			System.out.println("A");
+			break;
+		default : System.out.println("错误");//110+
+		}
+	}
+
+
+public static void main(String[] args) {
+		int a;
+		Scanner in =new Scanner(System.in);
+		a=in.nextInt();
+		switch(a/10){
+		case 0: case 1: case 2: case 3: case 4: case 5:
+			System.out.println("D");
+			break;
+		case 6:
+			System.out.println("C");
+			break;
+		case 7: case 8:
+			System.out.println("B");
+			break;
+		case 9: case 10:
+			System.out.println("A");
+			break;
+		default : System.out.println("错误");
+		}
+	}
